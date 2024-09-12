@@ -9,11 +9,15 @@ namespace RealState.Domain.Properties.Entity
         public required string Name { get; set; }
         public required string Address { get; set; }
         public decimal Price { get; set; }
-        public string CodeInternal { get; set; }
+        public string? CodeInternal { get; set; }
         public int Year { get; set; }
-        public Guid IdOwner { get; set; }
-        public Guid IdPropertyImage { get; set; }
+        public Guid IdOwner { get; set; } 
         public virtual Owner Owner { get; set; }
         public virtual ICollection<PropertyImage> PropertyImages { get; set; }
+
+        public void ChangePrice(decimal price)
+        {
+            Price = price;
+        }
     }
 }

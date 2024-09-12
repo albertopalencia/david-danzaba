@@ -14,6 +14,7 @@ namespace RealState.Application.PropertyImages.Command
         {
 
             Property property = await propertyRepository.GetByIdAsync(request.IdProperty);
+
             property.ValidateNull("Property not found");
 
             PropertyImage propertyImage = new()

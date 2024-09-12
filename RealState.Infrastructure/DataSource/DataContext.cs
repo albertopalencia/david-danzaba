@@ -11,11 +11,6 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        if (modelBuilder is null)
-        {
-            return;
-        }
-
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly);
 
         modelBuilder.Entity<Owner>();

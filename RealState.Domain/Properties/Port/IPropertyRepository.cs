@@ -6,7 +6,7 @@ namespace RealState.Domain.Properties.Port
     {
         Task<Property> AddAsync(Property property);
          
-        Task  updateAsync(Property property);
+        Task  UpdateAsync(Property property);
 
         Task<Property> GetByIdAsync(Guid id, string? include = default);
     }

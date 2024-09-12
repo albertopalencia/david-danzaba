@@ -10,27 +10,31 @@ namespace RealState.Api.ApiHandlers.Properties
         public static RouteGroupBuilder MapProperty(this IEndpointRouteBuilder routeHandler)
         {
 
-            routeHandler.MapGet("/filters", async (IMediator mediator, GetAllPropertyFilter filter) =>
+            routeHandler.MapGet("/filters", async (IMediator mediator,
+                    string? name, string? address, decimal? price, int? codeInternal,
+                    int? year, int pageNumber = 1, int pageSize = 10) =>
+            {
+                var query = new GetAllPropertyQuery()
                 {
-                    var query = new GetAllPropertyQuery()
-                    {
-                        Address = filter.Address,
-                        Name = filter.Name,
-                        Price = filter.Price,
-                        Year = filter.Year,
-                        PageNumber = filter.PageNumber,
-                        PageSize = filter.PageSize,
-                        CodeInternal = filter.CodeInternal
-                    };
-                    return Results.Ok(await mediator.Send(query));
-                })
+                    Address = address,
+                    Name = name,
+                    Price = price,
+                    Year = year,
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    CodeInternal = codeInternal
+                };
+                return Results.Ok(await mediator.Send(query));
+            })
             .Produces(StatusCodes.Status200OK)
             .WithSummary("Get all properties with filters")
             .WithOpenApi();
 
-            routeHandler.MapPut("/{propertyId}/price",
-                    async (IMediator mediator, Guid propertyId, decimal price) => Results.Ok(await mediator.Send(
-                            new ChangePropertyPriceCommand(propertyId, price))))
+            routeHandler.MapPut("/{propertyId}/{price}",
+                    async (IMediator mediator, Guid propertyId, decimal price) =>
+                    {
+                        return Results.Ok(await mediator.Send(new ChangePropertyPriceCommand(propertyId, price)));
+                    })
             .Produces(StatusCodes.Status200OK)
             .WithSummary("Change price of property ")
             .WithOpenApi();

@@ -9,7 +9,7 @@ namespace RealState.Infrastructure.Adapters
     {
         public async Task<Property> AddAsync(Property property) => await propertyRepository.AddAsync(property);
 
-        public Task updateAsync(Property property)
+        public Task UpdateAsync(Property property)
         {
             propertyRepository.UpdateAsync(property);
             return Task.CompletedTask;
