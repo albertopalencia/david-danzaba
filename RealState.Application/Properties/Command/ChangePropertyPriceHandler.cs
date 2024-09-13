@@ -5,7 +5,7 @@ using RealState.Domain.Properties.Port;
 
 namespace RealState.Application.Properties.Command
 {
-    internal class ChangePropertyPriceHandler(IPropertyRepository propertyRepository, IUnitOfWork unitOfWork) : IRequestHandler<ChangePropertyPriceCommand, Unit>
+    public class ChangePropertyPriceHandler(IPropertyRepository propertyRepository, IUnitOfWork unitOfWork) : IRequestHandler<ChangePropertyPriceCommand, Unit>
     {
         public async Task<Unit> Handle(ChangePropertyPriceCommand request, CancellationToken cancellationToken)
         {

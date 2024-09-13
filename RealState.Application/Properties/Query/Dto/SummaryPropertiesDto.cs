@@ -5,7 +5,7 @@ namespace RealState.Application.Properties.Query.Dto
 {
     public record SummaryPropertiesDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public required string Name { get; set; }
         public required string Address { get; set; }
         public decimal Price { get; set; }

@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 using RealState.Application.Owners.Command;
 
-namespace RealState.Api.ApiHandlers.Holidays
+namespace RealState.Api.Controllers.Owners
 {
-    public class InsertOwnerCommandValidator: AbstractValidator<InsertOwnerCommand>
+    public class InsertOwnerCommandValidator : AbstractValidator<InsertOwnerCommand>
     {
         public InsertOwnerCommandValidator()
         {
@@ -11,14 +11,14 @@ namespace RealState.Api.ApiHandlers.Holidays
                 .NotEmpty()
                 .Must(BeAValidDate);
 
-                RuleFor(o => o.Name) 
-                .NotEmpty();
+            RuleFor(o => o.Name)
+            .NotEmpty();
         }
 
         private bool BeAValidDate(DateTime date)
         {
             return !date.Equals(default);
         }
-         
+
     }
 }

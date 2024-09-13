@@ -6,10 +6,10 @@ namespace RealState.Domain.Properties.Entity
 {
     public class Property : DomainEntity
     {
-        public required string Name { get; set; }
-        public required string Address { get; set; }
+        public  string? Name { get; set; }  = default!;
+        public  string Address { get; set; } = default!;
         public decimal Price { get; set; }
-        public string? CodeInternal { get; set; }
+        public string? CodeInternal { get; set; } = Guid.NewGuid().ToString();  
         public int Year { get; set; }
         public Guid IdOwner { get; set; } 
         public virtual Owner Owner { get; set; }

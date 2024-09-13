@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using RealState.Application.Properties.Command;
 
-namespace RealState.Api.ApiHandlers.Properties
+namespace RealState.Api.Controllers.Properties
 {
     public class InsertPropertyCommandValidator : AbstractValidator<InsertPropertyCommand>
     {

@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealState.Application", "Re
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealState.Infrastructure", "RealState.Infrastructure\RealState.Infrastructure.csproj", "{06A8784B-3C62-4C07-A77E-F3E0C2EB2D67}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealState.Api.Tests", "RealState.Api.Tests\RealState.Api.Tests.csproj", "{9B86E663-73F2-442C-AE30-FD6FDFCDA772}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{06A8784B-3C62-4C07-A77E-F3E0C2EB2D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06A8784B-3C62-4C07-A77E-F3E0C2EB2D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06A8784B-3C62-4C07-A77E-F3E0C2EB2D67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B86E663-73F2-442C-AE30-FD6FDFCDA772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B86E663-73F2-442C-AE30-FD6FDFCDA772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B86E663-73F2-442C-AE30-FD6FDFCDA772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B86E663-73F2-442C-AE30-FD6FDFCDA772}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
