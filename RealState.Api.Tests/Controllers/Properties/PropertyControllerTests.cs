@@ -1,4 +1,17 @@
-﻿using MediatR;
+﻿// ***********************************************************************
+// Assembly         : RealState.Api.Tests
+// Author           : Usuario
+// Created          : 09-12-2024
+//
+// Last Modified By : Usuario
+// Last Modified On : 09-12-2024
+// ***********************************************************************
+// <copyright file="PropertyControllerTests.cs" company="RealState.Api.Tests">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using RealState.Api.Controllers.Properties;
@@ -11,12 +24,24 @@ using System.Threading.Tasks;
 
 namespace RealState.Api.Tests.Controllers.Properties
 {
+    /// <summary>
+    /// Defines test class PropertyControllerTests.
+    /// </summary>
     [TestFixture]
     public class PropertyControllerTests
     {
+        /// <summary>
+        /// The mock mediator
+        /// </summary>
         private Mock<IMediator> _mockMediator;
+        /// <summary>
+        /// The controller
+        /// </summary>
         private PropertyController _controller;
 
+        /// <summary>
+        /// Sets up.
+        /// </summary>
         [SetUp]
         public void SetUp()
         {
@@ -24,6 +49,9 @@ namespace RealState.Api.Tests.Controllers.Properties
             _controller = new PropertyController(_mockMediator.Object);
         }
 
+        /// <summary>
+        /// Defines the test method GetAllWithFilters_ShouldReturnOk.
+        /// </summary>
         [Test]
         public async Task GetAllWithFilters_ShouldReturnOk()
         {
@@ -44,6 +72,9 @@ namespace RealState.Api.Tests.Controllers.Properties
             Assert.AreEqual(properties, okResult.Value);
         }
 
+        /// <summary>
+        /// Defines the test method Create_ShouldReturnCreated.
+        /// </summary>
         [Test]
         public async Task Create_ShouldReturnCreated()
         {

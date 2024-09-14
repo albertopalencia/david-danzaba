@@ -1,15 +1,32 @@
-﻿using MediatR;
+﻿// ***********************************************************************
+// Assembly         : RealState.Api.Tests
+// Author           : Usuario
+// Created          : 09-12-2024
+//
+// Last Modified By : Usuario
+// Last Modified On : 09-13-2024
+// ***********************************************************************
+// <copyright file="PropertyImageControllerTests.cs" company="RealState.Api.Tests">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using RealState.Api.Controllers.PropertyImages;
-using System.Threading.Tasks;
-using System;
 using RealState.Application.PropertyImages.Command;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace RealState.Api.Tests.Controllers.PropertyImage;
 
 
+/// <summary>
+/// Defines test class PropertyImageControllerTests.
+/// </summary>
 [TestFixture]
 public class PropertyImageControllerTests
 {
@@ -18,7 +35,7 @@ public class PropertyImageControllerTests
     /// </summary>
     private Mock<IMediator> _mockMediator;
     /// <summary>
-    ///   <br />
+    /// <br />
     /// </summary>
     private PropertyImageController _controller;
 
@@ -49,10 +66,13 @@ public class PropertyImageControllerTests
             .Setup(m => m.Send(It.IsAny<InsertPropertyImageCommand>(), default))
             .ReturnsAsync(idPropertyImage);
 
-        // Act
-        var result = await _controller.AddImage(idProperty, file.Object);
 
-        // Assert
+        using var memoryStream = new MemoryStream();
+        await file.Object.CopyToAsync(memoryStream);
+
+        InsertPropertyImageCommand request = new() { IdProperty = idProperty, File = file.Object };
+        var result = await _controller.AddImage(request);
+
         var createdResult = result as CreatedResult;
         Assert.IsNotNull(createdResult);
         Assert.That(createdResult.Location, Is.EqualTo($"/images/{idPropertyImage}"));

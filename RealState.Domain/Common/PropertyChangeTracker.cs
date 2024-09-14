@@ -1,25 +1,35 @@
 ﻿namespace RealState.Domain.Common
-{
-    public static class PropertyChangeTracker
+{ public class ChangeTracker<T> where T : class
     {
-        public static T CreateEntityWithChangedProperties<T>(T original, T modified) where T : new()
-        { 
-            var changedEntity = new T();
+        public static T ApplyChanges(T existingEntity, T newEntity, out bool hasChanges)
+        {
+            if (existingEntity == null) throw new ArgumentNullException(nameof(existingEntity));
+            if (newEntity == null) throw new ArgumentNullException(nameof(newEntity));
+
+
+            var updatedEntity = CloneEntity(existingEntity);
+            hasChanges = false;
+
             var properties = typeof(T).GetProperties();
 
             foreach (var property in properties)
             {
-                var originalValue = property.GetValue(original);
-                var modifiedValue = property.GetValue(modified);
+                var existingValue = property.GetValue(existingEntity);
+                var newValue = property.GetValue(newEntity);
 
-                if (!Equals(originalValue, modifiedValue))
-                {
-                    property.SetValue(changedEntity, modifiedValue);
-                }
+                if (Equals(existingValue, newValue)) continue;
+
+                property.SetValue(updatedEntity, newValue);
+                hasChanges = true;
             }
 
-            return changedEntity;
+            return updatedEntity;
+
         }
 
+        private static T CloneEntity(T entity)
+        { 
+            return Activator.CreateInstance<T>();
+        }
     }
 }

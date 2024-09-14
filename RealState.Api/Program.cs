@@ -1,3 +1,16 @@
+// ***********************************************************************
+// Assembly         : RealState.Api
+// Author           : Usuario
+// Created          : 09-11-2024
+//
+// Last Modified By : Usuario
+// Last Modified On : 09-12-2024
+// ***********************************************************************
+// <copyright file="Program.cs" company="RealState.Api">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -85,23 +98,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllers();
-
-//app.MapGroup("/api/property")
-//    .MapProperty()
-//    .AddEndpointFilterFactory(ValidationFilter.ValidationFilterFactory)
-//    .WithTags("Properties");
-
-
-//app.MapGroup("/api/propertyImage")
-//    .MapPropertyImage()
-//    .AddEndpointFilterFactory(ValidationFilter.ValidationFilterFactory)
-//    .WithTags("Property Images");
-
-//app.MapGroup("/api/owner")
-//    .MapOwner()
-//    .AddEndpointFilterFactory(ValidationFilter.ValidationFilterFactory)
-//    .WithTags("Owners");
+app.MapControllers(); 
 
 
 app.Run();

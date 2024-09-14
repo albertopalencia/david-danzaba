@@ -29,6 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Application\Owners\Command\" />
+    <Folder Include="Application\Owners\Dto\" />
     <Folder Include="Controllers\PropertyImage\" />
     <Folder Include="Controllers\Properties\" />
   </ItemGroup>

@@ -1,4 +1,17 @@
-﻿using MediatR;
+﻿// ***********************************************************************
+// Assembly         : RealState.Api.Tests
+// Author           : Usuario
+// Created          : 09-12-2024
+//
+// Last Modified By : Usuario
+// Last Modified On : 09-12-2024
+// ***********************************************************************
+// <copyright file="OwnerControllerTests.cs" company="RealState.Api.Tests">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using RealState.Api.Controllers.Owners;
@@ -11,12 +24,24 @@ using System.Threading.Tasks;
 
 namespace RealState.Api.Tests.Controllers.Owners
 {
+    /// <summary>
+    /// Defines test class OwnerControllerTests.
+    /// </summary>
     [TestFixture]
     public class OwnerControllerTests
     {
+        /// <summary>
+        /// The mock mediator
+        /// </summary>
         private Mock<IMediator> _mockMediator;
+        /// <summary>
+        /// The controller
+        /// </summary>
         private OwnerController _controller;
 
+        /// <summary>
+        /// Sets up.
+        /// </summary>
         [SetUp]
         public void SetUp()
         {
@@ -24,6 +49,9 @@ namespace RealState.Api.Tests.Controllers.Owners
             _controller = new OwnerController(_mockMediator.Object);
         }
 
+        /// <summary>
+        /// Defines the test method GetAll_ShouldReturnOk.
+        /// </summary>
         [Test]
         public async Task GetAll_ShouldReturnOk()
         {
@@ -45,10 +73,20 @@ namespace RealState.Api.Tests.Controllers.Owners
             Assert.IsInstanceOf<OkObjectResult>(result);
         }
 
+        /// <summary>
+        /// Defines the test method Create_ShouldReturnCreated.
+        /// </summary>
         [Test]
         public async Task Create_ShouldReturnCreated()
         {
-            var newOwner = new InsertOwnerCommand("Jane Doe", "123 Main St", "https://example.com/photo.jpg", DateTime.UtcNow);
+            var newOwner = new InsertOwnerCommand()
+            {
+                Name = "Jane Doe",
+                Address = "123 Main St",
+                Photo = "img2.jpg",
+                Birthday = DateTime.UtcNow
+            };
+
             var ownerId = Guid.NewGuid();
 
             _mockMediator
@@ -59,7 +97,7 @@ namespace RealState.Api.Tests.Controllers.Owners
 
             var createdResult = result as CreatedAtActionResult;
             Assert.IsNotNull(createdResult);
-            Assert.AreEqual(ownerId, createdResult.Value);
+            Assert.That(createdResult.Value, Is.EqualTo(ownerId));
         }
     }
 }

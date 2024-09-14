@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : RealState.Infrastructure
+// Author           : Usuario
+// Created          : 09-12-2024
+//
+// Last Modified By : Usuario
+// Last Modified On : 09-12-2024
+// ***********************************************************************
+// <copyright file="20240912085003_InitialCreate.cs" company="RealState.Infrastructure">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
