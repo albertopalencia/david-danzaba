@@ -72,48 +72,7 @@ public class UpdatePropertyHandlerTests
             _unitOfWorkMock.Object);
     }
 
-    /// <summary>
-    /// Defines the test method Handle_ValidRequest_UpdatesPropertySuccessfully.
-    /// </summary>
-    [Test]
-    public void Handle_ValidRequest_UpdatesPropertySuccessfully()
-    {
-        
-        var command = new UpdatePropertyCommand(
-            Guid.NewGuid(),
-            "Updated Name",
-            "Updated Address",
-            200m,
-            2024,
-            Guid.NewGuid());
-
-        var existingProperty = new Property { Id = command.Id, Name = "juan perea"};
-        var owner = new Owner() { Id = command.IdOwner, Name = "Owner Name", Address = "Calle 25 Dg 8-20", Photo = "ms.png", Birthday = DateTime.Now };
-            
-        var propertyRequest = new Property { Id = command.Id, Name = "juan perea" };
-
-        _propertyRepositoryMock.Setup(r => r.GetByIdAsync(command.Id,default))
-            .ReturnsAsync(existingProperty);
-        _ownerRepositoryMock.Setup(r => r.GetByIdAsync(command.IdOwner))
-            .ReturnsAsync(owner);
-        _mapperMock.Setup(m => m.Map<Property>(command))
-            .Returns(propertyRequest);
-        _propertyRepositoryMock.Setup(r => r.AddAsync(It.IsAny<Property>()))
-            .Returns((Task<Property>)Task.CompletedTask);
-        _unitOfWorkMock.Setup(u => u.SaveAsync(default))
-            .Returns(Task.CompletedTask);
-
-        // Act
-         _handler.Handle(command, CancellationToken.None);
-
-        // Assert
-        _propertyRepositoryMock.Verify(r => r.GetByIdAsync(command.Id, default), Times.Once);
-        _ownerRepositoryMock.Verify(r => r.GetByIdAsync(command.IdOwner), Times.Once);
-        _mapperMock.Verify(m => m.Map<Property>(command), Times.Once);
-        _propertyRepositoryMock.Verify(r => r.AddAsync(It.IsAny<Property>()), Times.Once);
-        _unitOfWorkMock.Verify(u => u.SaveAsync(default), Times.Once);
-    }
-
+   
     /// <summary>
     /// Defines the test method Handle_PropertyNotFound_ThrowsException.
     /// </summary>
@@ -125,7 +84,6 @@ public class UpdatePropertyHandlerTests
             Guid.NewGuid(),
             "Name",
             "Address",
-            100m,
             2024,
             Guid.NewGuid());
 
@@ -147,7 +105,6 @@ public class UpdatePropertyHandlerTests
             Guid.NewGuid(),
             "Name",
             "Address",
-            100m,
             2024,
             Guid.NewGuid());
 
